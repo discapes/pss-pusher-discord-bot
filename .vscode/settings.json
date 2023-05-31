@@ -1,0 +1,37 @@
+{
+  "editor.codeActionsOnSave": [
+    "source.addMissingImports",
+    "source.organizeImports",
+    "source.fixAll.eslint"
+  ],
+  "eslint.packageManager": "pnpm",
+  "files.associations": {
+    ".eslintrc": "json",
+    "*.json": "json"
+  },
+  "files.exclude": {
+    "**/node_modules": true
+  },
+  "git.decorations.enabled": false,
+  "editor.detectIndentation": false,
+  "editor.indentSize": "tabSize",
+  "eslint.probe": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "html",
+    "vue",
+    "markdown",
+    "json"
+  ],
+  "eslint.validate": [
+    "json"
+  ],
+  "eslint.rules.customizations": [
+    {
+      "rule": "*",
+      "severity": "warn"
+    }
+  ]
+}

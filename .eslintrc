@@ -1,0 +1,59 @@
+{
+  "env": {
+    "browser": false,
+    "es2021": true
+  },
+  "extends": [
+    "airbnb",
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "overrides": [],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": [
+    "json-format",
+    "@typescript-eslint"
+  ],
+  "settings": {
+    "json/json-with-comments-files": []
+  },
+  "root": true,
+  "rules": {
+    "indent": [
+      "error",
+      "tab"
+    ],
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
+    "quotes": [
+      "error",
+      "double"
+    ],
+    "semi": [
+      "error",
+      "always"
+    ],
+    "import/prefer-default-export": "off",
+    "no-tabs": "off",
+    "no-use-before-define": 0,
+    "global-require": 0,
+    "max-len": 0,
+    "no-param-reassign": 0,
+    "import/extensions": [
+      0,
+      "never"
+    ],
+    "import/no-unresolved": 0,
+    "default-case-last": 0,
+    "prefer-regex-literals": 0,
+    "no-restricted-syntax": 0,
+    "no-return-await": 0
+  }
+}
