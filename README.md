@@ -25,7 +25,7 @@ Install dependencies with `pnpm install`.
 
 ## CI/CD
 
-- In GitHub secrets, set `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` (needs access to ECR and ECS)
-- In GitHub variables, set `ECS_CLUSTER`, `ECS_SERVICE`, `AWS_REGION` and `ECR_REPOSITORY` (to the names)
 - Edit taskdef.json to use your own resources
+- In GitHub secrets, set `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` (needs access to ECR and ECS)
+- In GitHub variables, set `ECS_CLUSTER`, `ECS_SERVICE`, `AWS_REGION`, `ECS_CONTAINER_NAME` and `ECR_REPOSITORY` (to the names)
 - Push to master
