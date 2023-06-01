@@ -1,4 +1,4 @@
-import { Renumber } from "./jseparser";
+import { Renumber } from "./pss-api/jseparser";
 
 export interface DeviceLoginResult {
   User: User;

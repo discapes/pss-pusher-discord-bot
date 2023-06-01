@@ -5,7 +5,8 @@
     "moduleResolution": "node",
     "strict": true,
     "allowSyntheticDefaultImports": true,
-    "outDir": "build"
+    "outDir": "build",
+    "esModuleInterop": true
   },
   "include": [
     "**/*.ts"

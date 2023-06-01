@@ -54,6 +54,7 @@
     "default-case-last": 0,
     "prefer-regex-literals": 0,
     "no-restricted-syntax": 0,
-    "no-return-await": 0
+    "no-return-await": 0,
+    "no-multiple-empty-lines": 0
   }
 }

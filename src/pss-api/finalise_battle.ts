@@ -1,6 +1,6 @@
 import { spawn } from "child_process";
+import { BattleReport } from "../types.js";
 import { JSEParse, JSEStringify } from "./jseparser.js";
-import { BattleReport } from "./types";
 
 export function haes(mode: string, data: string): Promise<string> {
 	return new Promise((res, rej) => {

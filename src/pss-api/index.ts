@@ -3,7 +3,6 @@ import { XMLParser } from "fast-xml-parser";
 import { readFile, writeFile } from "fs/promises";
 import md5 from "md5";
 import Pusher from "pusher-js";
-import { EMPTY_MANUALCOMMANDS, createFinaliseBattleBody } from "./finalise_battle.js";
 import {
 	AcceptBattleResult,
 	AddStarbuxResult,
@@ -21,7 +20,8 @@ import {
 	SetStarshipNameResult,
 	UserEmailPasswordAuthorizeResult,
 	UserKeyPasswordAuthorizeResult,
-} from "./types";
+} from "../types.js";
+import { EMPTY_MANUALCOMMANDS, createFinaliseBattleBody } from "./finalise_battle.js";
 
 export const libConfig = {
 	logger: (str: string, o?: {}) => {},
@@ -276,27 +276,30 @@ export async function sendMessage(message: string, channel: string, accessToken:
 	});
 }
 
-export async function initializePusher(logger = (s: string, o?: {}) => {}) {
-	let { accessToken, userId } = await getAccount();
+// we ask for a deviceKey because we might need to occasionally reauthenticate
+export async function initializePusher(deviceKey: string) {
+	let { $accessToken: accessToken, $UserId: userId } = await deviceLogin(deviceKey);
 
-	Pusher.log = logger;
+	Pusher.log = libConfig.logger;
 	const pusher = new Pusher(PUSHER_APP_KEY, {
 		cluster: PUSHER_APP_CLUSTER,
 		channelAuthorization: {
 			endpoint: null as any,
 			transport: null as any,
 			async customHandler({ channelName, socketId }, callback) {
-				if (!accessToken) ({ accessToken } = await getAccount());
+				if (!accessToken) {
+					accessToken = (await deviceLogin(deviceKey)).$accessToken;
+				}
 
-				const res = await fetch(`${SERVER_URL}/UserService/PusherAuth?accessToken=${accessToken}`, {
+				const json = await fetch(`${SERVER_URL}/UserService/PusherAuth?accessToken=${accessToken}`, {
 					method: "POST",
 					body: new URLSearchParams({
 						socket_id: socketId,
 						channel_name: channelName,
 					}).toString(),
 				}).then((res) => res.json());
-				logger("Auth result:", res);
-				callback(null, res);
+				libConfig.logger("Auth result:", json);
+				callback(null, json);
 
 				accessToken = null;
 			},
