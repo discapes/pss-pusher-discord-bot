@@ -49,7 +49,7 @@ pusher.bind("message", (msg: any) => {
 				.replace("판매 중", "Selling")
 				.replace("正在出售", "Bought")
 				.replace("Продает", "Selling")
-				.replace("Selling", "Is selling")
+				.replace("Selling", "is selling")
 				.toLowerCase()} for ${msg.ActivityArgument.split(":")[1]} ${msg.ActivityArgument.split(":")[0]}`,
 		));
 		break;
