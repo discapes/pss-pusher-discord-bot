@@ -11,7 +11,8 @@
     "build-docker": "docker buildx build . -t pss-pusher-discord-bot",
     "dev": "ts-node --esm src/index.ts",
     "start": "node build",
-    "start-docker": "docker run pss-pusher-discord-bot"
+    "start-docker": "docker run pss-pusher-discord-bot",
+    "sync-s3": "which aws && aws s3 cp s3://miika-env/pss-pusher-discord-bot/ ."
   },
   "dependencies": {
     "discord.js": "^14.11.0",
