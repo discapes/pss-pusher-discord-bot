@@ -9,7 +9,7 @@ env:
   ECS_CLUSTER: ${{ vars.ECS_CLUSTER }}
   ECS_SERVICE: ${{ vars.ECS_SERVICE }}
   AWS_REGION: ${{ vars.AWS_REGION }}
-  ECR_REPOSITORY: ${{ vars.ECR_REPOSITORY }}
+  ECR_REPOSITORY: ${{ vars.ECR_REPOSITORY }} # repo name
   ECS_CONTAINER_NAME: ${{ vars.ECS_CONTAINER_NAME }} # one in the taskdef
   IMAGE_TAG: ${{ github.sha }}
   ECS_TASK_DEFINITION: taskdef.json
