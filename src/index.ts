@@ -1,12 +1,9 @@
 import { Client, GatewayIntentBits, TextChannel } from "discord.js";
 import { config as dotenv } from "dotenv";
 import { createWriteStream } from "fs";
-import promptConfig from "prompt-sync";
 import { initializePusher, libConfig } from "./lib.js";
 
 dotenv();
-
-const prompt = promptConfig({ sigint: true, eot: true });
 
 const formatDate = (d: Date) => `${d.toISOString().slice(0, "2023-03-06".length)
 } ${d.getUTCHours().toString().padStart(2, "0")
@@ -47,11 +44,13 @@ pusher.bind("message", (msg: any) => {
 	switch (msg.MessageType) {
 	case "Market":
 		marketChannels.map((c) => c.send(
-			`${dateString} - ${msg.UserName} - ${msg.Message.replace("在卖", "Selling")
+			`${dateString} - \`${msg.UserName}\` ${(<string>msg.Message).replace("在卖", "Selling")
 				.replace("販売", "Selling")
 				.replace("판매 중", "Selling")
 				.replace("正在出售", "Bought")
-				.replace("Продает", "Selling")} for ${msg.ActivityArgument.split(":")[1]} ${msg.ActivityArgument.split(":")[0]}`,
+				.replace("Продает", "Selling")
+				.replace("Selling", "Is selling")
+				.toLowerCase()} for ${msg.ActivityArgument.split(":")[1]} ${msg.ActivityArgument.split(":")[0]}`,
 		));
 		break;
 	default:
