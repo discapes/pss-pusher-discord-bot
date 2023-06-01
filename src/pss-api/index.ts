@@ -278,7 +278,9 @@ export async function sendMessage(message: string, channel: string, accessToken:
 
 // we ask for a deviceKey because we might need to occasionally reauthenticate
 export async function initializePusher(deviceKey: string) {
-	let { $accessToken: accessToken, $UserId: userId } = await deviceLogin(deviceKey);
+	let accessToken: string | null; let
+		userId: string;
+	({ $accessToken: accessToken, $UserId: userId } = await deviceLogin(deviceKey));
 
 	Pusher.log = libConfig.logger;
 	const pusher = new Pusher(PUSHER_APP_KEY, {
