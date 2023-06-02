@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - staging
 
 env:
   ECS_CLUSTER: ${{ vars.ECS_CLUSTER }}
@@ -12,13 +13,13 @@ env:
   ECR_REPOSITORY: ${{ vars.ECR_REPOSITORY }} # repo name
   ECS_CONTAINER_NAME: ${{ vars.ECS_CONTAINER_NAME }} # one in the taskdef
   IMAGE_TAG: ${{ github.sha }}
-  ECS_TASK_DEFINITION: taskdef.json
+  ECS_TASK_DEFINITION: ${{ vars.TASKDEF_FILENAME || 'taskdef.json' }}
 
 jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
-    environment: production
+    environment: ${{ github.ref_name }}
 
     steps:
       - name: Checkout
