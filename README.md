@@ -27,5 +27,16 @@ Install dependencies with `pnpm install`.
 
 - Edit taskdef.json to use your own resources
 - In GitHub secrets, set `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` (needs access to ECR and ECS)
-- In GitHub variables, set `ECS_CLUSTER`, `ECS_SERVICE`, `AWS_REGION`, `ECS_CONTAINER_NAME` and `ECR_REPOSITORY` (to the names)
+- Create a new ECS Cluster, ECS TaskDefinition (use taskdef.json), ECS Service and ECR repository
+- In GitHub variables, set `ECS_CLUSTER`,  `AWS_REGION`, `ECS_CONTAINER_NAME` and `ECR_REPOSITORY`
+- Create a new GitHub environment and name it to `master`
+- In the environment's variables, set `ECS_SERVICE`
 - Push to master
+
+## Staging CI/CD
+
+- Edit taskdef-staging.json to use your own resources
+- Create a new ECS TaskDefinition (use taskdef-staging.json) and ECS Service
+- Create a new GitHub environment and name it to `staging`
+- In the environment's variables, set `ECS_SERVICE` and `TASKDEF_FILENAME` (to taskdef-staging.json)
+- Push to staging
