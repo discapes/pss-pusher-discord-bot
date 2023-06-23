@@ -39,8 +39,8 @@ pusher.subscribe("market");
 pusher.bind("message", (msg: any) => {
         switch (msg.MessageType) {
         case "Market":
-                console.log(formatMarketMessage(msg));
-                marketChannels.map((c) => 0);
+                const formatted = formatMarketMessage(msg);
+                marketChannels.map((c) => c.send(formatted));
                 break;
         default:
                 publicChannels.map((c) => c.send(`${msg.UserName}: ${msg.Message}`));
