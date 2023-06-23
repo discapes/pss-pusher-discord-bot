@@ -37,20 +37,20 @@ const pusher = await initializePusher(process.env.PSS_DEVICE_KEY);
 pusher.subscribe("public-en");
 pusher.subscribe("market");
 pusher.bind("message", (msg: any) => {
-	const timestamp = formatTime(new Date());
-	switch (msg.MessageType) {
-	case "Market":
-		marketChannels.map((c) => c.send(
-			`${timestamp} - \`${msg.UserName}\` ${(<string>msg.Message).replace("在卖", "Selling")
-				.replace("販売", "Selling")
-				.replace("판매 중", "Selling")
-				.replace("正在出售", "Bought")
-				.replace("Продает", "Selling")
-				.replace("Selling", "is selling")
-				.toLowerCase()} for ${msg.ActivityArgument.split(":")[1]} ${msg.ActivityArgument.split(":")[0]}`,
-		));
-		break;
-	default:
-		publicChannels.map((c) => c.send(`${msg.UserName}: ${msg.Message}`));
-	}
+        switch (msg.MessageType) {
+        case "Market":
+                console.log(formatMarketMessage(msg));
+                marketChannels.map((c) => 0);
+                break;
+        default:
+                publicChannels.map((c) => c.send(`${msg.UserName}: ${msg.Message}`));
+        }
 });
+
+
+function formatMarketMessage(msg: any) {
+        const timestamp = formatTime(new Date());
+        const action = msg.Message.replace(/.*? (\d)/, msg.ActivityType.replace("MarketListed", "is selling").replace("MarketSold", "bought") + ' $1');
+        const price = msg.ActivityArgument.split(":").reverse().join(" ");
+        return `${timestamp} - \`${msg.UserName}\` ${action} for ${price}`;
+}
